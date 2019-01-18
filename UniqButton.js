@@ -36,6 +36,12 @@ ReactDOM.render(
 
 const basicButt = css`
    {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    font-size: 14px;
+
     width: 100%;
     height: 100%;
 
@@ -83,7 +89,12 @@ const normalButt = css`
 `;
 const basicTypeAddress = css`
    {
+    font-family: Open Sans;
+    font-style: normal;
     font-weight: light;
+    line-height: 20px;
+    font-size: 14px;
+
     text-decoration: none;
   }
 `;
