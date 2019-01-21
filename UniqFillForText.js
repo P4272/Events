@@ -9,47 +9,98 @@ import UniqFillForText from "./UniqFillForText.js";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <UniqFillForText name="Место" placeholder="Введите название" value="" />,
-  rootElement
+  <UniqFillForText
+    name="Место"
+    typeInput="place"
+    placeholder="Напишите где находится"
+    value=""
+  />
 );
  */
 
+const base = css`
+   {
+    display: flex;
+    flex-wrap: wrap;
+  }
+`;
 const textStyle = css`
    {
     color: #a4a0a8;
 
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 20px;
-    font-size: 14px;
+    font: 14px/20px Open Sans, sans-serif;
+    white-space: nowrap;
+  }
+`;
+
+const labelPlace = css`
+   {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+`;
+
+const labelTitle = css`
+   {
+    width: 148px;
+    padding: 4px 12px 8px 0px;
   }
 `;
 
 const standartInputStyle = css`
    {
-    width: 100%;
-    height: 100%;
-
-    margin-top: 8px;
-    padding-left: 12px;
-    padding-bottom: 4px;
+    padding: 4px 12px 8px 12px;
 
     border-color: #d4d5e5;
     border-radius: 4px;
     border-width: 1px;
+    box-sizing: border-box;
   }
 `;
 
+const inputPlace = css`
+   {
+    flex-grow: 1;
+  }
+`;
+
+const inputTitle = css`
+   {
+    flex-grow: 1;
+  }
+`;
+/**Название встречи (мелкий размер input)
+ * Название события (полный размер input)
+ * Место (Находится над полем)
+ */
+
 class UniqFillForText extends Component {
   render() {
+    const id = Date.now().toString(36) + Math.random().toString(36);
+    const typeIn = this.props.typeInput;
+    const classNameTypeLabel =
+      typeIn === "title"
+        ? labelTitle
+        : typeIn === "place"
+        ? labelPlace
+        : new Error();
+    const classNameTypeInput =
+      typeIn === "title"
+        ? inputTitle
+        : typeIn === "place"
+        ? inputPlace
+        : new Error();
+
     return (
-      <div className={textStyle}>
-        <div>{this.props.name}</div>
+      <div className={base}>
+        <label for={id} className={cx(textStyle, classNameTypeLabel)}>
+          {this.props.name}
+        </label>
         <input
+          id={id}
           type="text"
           placeholder={this.props.placeholder}
-          className={cx(textStyle, standartInputStyle)}
+          className={cx(textStyle, classNameTypeInput, standartInputStyle)}
           value={this.props.value}
         />
       </div>
