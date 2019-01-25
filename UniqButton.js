@@ -1,21 +1,7 @@
 import React, { Component } from "react";
 import { css, cx } from "emotion";
 
-/**UniqButton
- * name - имя, отображаемое на кнопке
- * type - (active, deactive, normal) - тип кнопки, указывающий предназначение и стиль,
- * - active - красная, для "присоединиться" "повторить" "создать встречу" ...
- * - deactive - фиолетовый кант, внутри белая, для кнопки "подробнее" "редактировать"
- * - normal - только для фиолетовой кнопки "найти"
- * inversion - (0,1) позволяет изменить только цветовое отображение кнопки
- * - 0 - базовые описанные типы
- * - 1 - изменение active в фиолетовый цвет
- *     - изменение deactive в чёрный цвет
- * src - ссылка на страницу, если для кнопки требуется переход
- * eventOnClick - событие, куда передаётся скрипт, чтобы кнопка что-то делали при нажатии
- */
-
-/**использовать так
+/**
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -24,11 +10,11 @@ import UniqButton from "./UniqButton.js";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <UniqButton
-      name="Отмена"
-      type="normal"
-      inversion="1"
-      typeSize="standart"
-      eventOnClick=""
+    name="Отмена"
+    type="active"
+    inversion="0"
+    eventOnClick=""
+    size="big"
   />
   rootElement
 );
@@ -109,7 +95,7 @@ class UniqButton extends Component {
       activeButton,
       styleTextActive
     );
-    const typeSelectionDeAction = cx(typeSelection, deActiveButton);
+    const typeSelectionDeAction = cx(typeSelectionBasic, deActiveButton);
 
     const typeSize = this.props.size === "big" ? bigSize : basicSize;
 
@@ -117,7 +103,7 @@ class UniqButton extends Component {
       typeSelection = cx(typeSelectionAction, typeSize);
     }
     if (this.props.type === "active" && this.props.inversion === "1") {
-      typeSelection = cx(typeSelectionAction, activeInversionButton);
+      typeSelection = cx(typeSelectionAction, activeInversionButton, basicSize);
     }
     if (this.props.type === "deactive" && this.props.inversion === "0") {
       typeSelection = cx(typeSelectionDeAction, styleTextDeActive);

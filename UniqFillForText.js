@@ -10,9 +10,9 @@ import UniqFillForText from "./UniqFillForText.js";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <UniqFillForText
-    name="Место"
+    name="ÐÐµÑÑÐ¾"
     typeInput="place"
-    placeholder="Напишите где находится"
+    placeholder="ÐÐ°Ð¿Ð¸ÑÐ¸ÑÐµ Ð³Ð´Ðµ Ð½Ð°ÑÐ¾Ð´Ð¸ÑÑÑ"
     value=""
   />
 );
@@ -69,9 +69,9 @@ const inputTitle = css`
     flex-grow: 1;
   }
 `;
-/**Название встречи (мелкий размер input)
- * Название события (полный размер input)
- * Место (Находится над полем)
+/**ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð²ÑÑÑÐµÑÐ¸ (Ð¼ÐµÐ»ÐºÐ¸Ð¹ ÑÐ°Ð·Ð¼ÐµÑ input)
+ * ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ ÑÐ¾Ð±ÑÑÐ¸Ñ (Ð¿Ð¾Ð»Ð½ÑÐ¹ ÑÐ°Ð·Ð¼ÐµÑ input)
+ * ÐÐµÑÑÐ¾ (ÐÐ°ÑÐ¾Ð´Ð¸ÑÑÑ Ð½Ð°Ð´ Ð¿Ð¾Ð»ÐµÐ¼)
  */
 
 class UniqFillForText extends Component {
