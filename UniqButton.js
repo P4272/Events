@@ -11,10 +11,10 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <UniqButton
     name="Отмена"
-    type="active"
-    inversion="0"
+    type="active" /active /deactive /normal
+    inversion="0" /0 /1 /2
     eventOnClick=""
-    size="big"
+    size="big" /big /other
   />
   rootElement
 );
@@ -51,7 +51,6 @@ const activeButton = css`
 const deActiveButton = css`
    {
     background: #fff;
-    border-color: #af8cd7;
     border-width: 1px;
     border-radius: 50px;
   }
@@ -67,15 +66,22 @@ const styleTextActive = css`
     color: #fff;
   }
 `;
-const styleTextDeActive = css`
+const styleDeActive = css`
    {
+    border-color: #af8cd7;
     color: #af8cd7;
   }
 `;
-const styleTextDeActiveInversion = css`
+const styleDeActiveInversion = css`
    {
     color: #000;
     border-color: #000;
+  }
+`;
+const styleDeActiveRed = css`
+   {
+    color: #ff5151;
+    border-color: #ff5151;
   }
 `;
 const normalStyle = css`
@@ -106,10 +112,13 @@ class UniqButton extends Component {
       typeSelection = cx(typeSelectionAction, activeInversionButton, basicSize);
     }
     if (this.props.type === "deactive" && this.props.inversion === "0") {
-      typeSelection = cx(typeSelectionDeAction, styleTextDeActive);
+      typeSelection = cx(typeSelectionDeAction, styleDeActive);
     }
     if (this.props.type === "deactive" && this.props.inversion === "1") {
-      typeSelection = cx(typeSelectionDeAction, styleTextDeActiveInversion);
+      typeSelection = cx(typeSelectionDeAction, styleDeActiveInversion);
+    }
+    if (this.props.type === "deactive" && this.props.inversion === "2") {
+      typeSelection = cx(typeSelectionDeAction, styleDeActiveRed);
     }
     if (this.props.type === "normal") {
       typeSelection = cx(typeSelectionBasic, normalStyle);
