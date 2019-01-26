@@ -1,25 +1,6 @@
 import React, { Component } from "react";
 import { css, cx } from "emotion";
 
-/**
-import React from "react";
-import ReactDOM from "react-dom";
-
-import UniqButton from "./UniqButton.js";
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(
-  <UniqButton
-    name="Отмена"
-    type="active" /active /deactive /normal
-    inversion="0" /0 /1 /2
-    eventOnClick=""
-    size="big" /big /other
-  />
-  rootElement
-);
-*/
-
 const basicButton = css`
    {
     text-align: center;
@@ -27,20 +8,20 @@ const basicButton = css`
 `;
 const basicSize = css`
    {
-    padding: 4px 12px 8px 12px;
+    padding: 6px 16px 6px 16px;
   }
 `;
 const bigSize = css`
    {
-    padding: 12px 16px 16px 16px;
+    padding: 14px 20px 14px 20px;
   }
 `;
-const activeInversionButton = css`
+const mainInversionButton = css`
    {
     background-color: #af8cd7;
   }
 `;
-const activeButton = css`
+const mainButton = css`
    {
     background-color: #ff5151;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
@@ -48,7 +29,7 @@ const activeButton = css`
     border-width: 0;
   }
 `;
-const deActiveButton = css`
+const negativeButton = css`
    {
     background: #fff;
     border-width: 1px;
@@ -66,19 +47,19 @@ const styleTextActive = css`
     color: #fff;
   }
 `;
-const styleDeActive = css`
+const styleNegative = css`
    {
     border-color: #af8cd7;
     color: #af8cd7;
   }
 `;
-const styleDeActiveInversion = css`
+const styleNegativeInversion = css`
    {
     color: #000;
     border-color: #000;
   }
 `;
-const styleDeActiveRed = css`
+const styleNegativeRed = css`
    {
     color: #ff5151;
     border-color: #ff5151;
@@ -96,35 +77,42 @@ class UniqButton extends Component {
   render() {
     let typeSelection = cx(basicButton, styleBasicType);
     const typeSelectionBasic = cx(basicButton, styleBasicType, basicSize);
-    const typeSelectionAction = cx(
-      typeSelection,
-      activeButton,
-      styleTextActive
-    );
-    const typeSelectionDeAction = cx(typeSelectionBasic, deActiveButton);
+    const typeSelectionMain = cx(typeSelection, mainButton, styleTextActive);
+    const typeSelectionNegative = cx(typeSelectionBasic, negativeButton);
 
     const typeSize = this.props.size === "big" ? bigSize : basicSize;
+    const type = this.props.type;
+    const version = this.props.version;
 
-    if (this.props.type === "active" && this.props.inversion === "0") {
-      typeSelection = cx(typeSelectionAction, typeSize);
+    if (type === "main") {
+      let ts = [typeSelectionMain];
+      version === "0"
+        ? ts.push(typeSize)
+        : ts.push(mainInversionButton, basicSize);
+      typeSelection = cx(ts);
     }
-    if (this.props.type === "active" && this.props.inversion === "1") {
-      typeSelection = cx(typeSelectionAction, activeInversionButton, basicSize);
+    if (type === "negative") {
+      let ts = [typeSelectionNegative];
+      if (version === "0") {
+        ts.push(styleNegative);
+      }
+      if (version === "1") {
+        ts.push(styleNegativeInversion);
+      }
+      if (version === "2") {
+        ts.push(styleNegativeRed);
+      }
+      typeSelection = cx(ts);
     }
-    if (this.props.type === "deactive" && this.props.inversion === "0") {
-      typeSelection = cx(typeSelectionDeAction, styleDeActive);
-    }
-    if (this.props.type === "deactive" && this.props.inversion === "1") {
-      typeSelection = cx(typeSelectionDeAction, styleDeActiveInversion);
-    }
-    if (this.props.type === "deactive" && this.props.inversion === "2") {
-      typeSelection = cx(typeSelectionDeAction, styleDeActiveRed);
-    }
-    if (this.props.type === "normal") {
+    if (type === "find") {
       typeSelection = cx(typeSelectionBasic, normalStyle);
     }
     return (
-      <button onClick={this.props.onClick} className={typeSelection}>
+      <button
+        type="button"
+        onClick={this.props.onClick}
+        className={typeSelection}
+      >
         {this.props.name}
       </button>
     );
